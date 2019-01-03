@@ -16,8 +16,6 @@ public class Main {
         FileSystem fs = FileSystem.get(new URI(NAME_NODE), new Configuration());
         String fileContent = IOUtils.toString(fs.open(new Path(fileInHdfs)), "UTF-8");
         System.out.println("File content - " + fileContent);
-
-        System.out.println("Hello World!");
     }
 }
 
