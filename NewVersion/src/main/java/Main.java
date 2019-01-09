@@ -29,7 +29,31 @@ public class Main {
                     FileSystem fs = FileSystem.get(conf);
 
                     if (arguments[0].equals("write")) {
-                        File sourceDir = new File(arguments[1]);
+//                        File sourceDir = new File(arguments[1]);
+//                        System.out.println("Writing files to HDFS from " + sourceDir);
+
+                        String director = arguments[1];
+                        File sourceDir = new File(director);
+                        //boolean bool = sourceDir.mkdir();
+                        //  if (bool || (!bool && sourceDir.list().length == 0)) {
+                        //     String[] commandSmall = {"dd", "if=/dev/urandom", "of=" + director + "/small.txt", "bs=1000", "count=1"};
+                        //     String[] commandMedium = {"dd", "if=/dev/urandom", "of=" + director + "/ medium.txt", "bs=100000", "count=1"};
+                        //     String[] commandBig = {"dd", "if=/dev/urandom", "of=" + director + "/big.txt", "bs=1000000", "count=1"};
+                        List<String[]> commands = new ArrayList<String[]>();
+                        //  Collections.addAll(commands, commandSmall, commandMedium, commandBig);
+                        String[] commandBig;
+                        try {
+                            for (Integer i = 0; i < 10; i++) {
+                                commandBig = new String[]{"dd", "if=/dev/urandom", "of=" + director + "/medium" + i + ".txt", "bs=100000", "count=1"};
+                                //Runtime.getRuntime().exec(commands.get(i));
+                                Runtime.getRuntime().exec(commandBig);
+
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        //  }
+                        Thread.sleep(100);
                         System.out.println("Writing files to HDFS from " + sourceDir);
 
                         for(File file : sourceDir.listFiles()) {
